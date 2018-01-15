@@ -1,0 +1,11 @@
+#! /bin/bash
+TIMESTAMP=`date`
+LOGFILE=$HOME/virginsucks/virgin.log
+
+# Use SNMP to turn the modem off
+/usr/bin/snmpset -v 1 -c private bottompdu.23wwc.org 1.3.6.1.4.1.318.1.1.12.3.3.1.1.4.2 integer 2
+
+/bin/sleep 3
+
+# And turn it back on again
+/usr/bin/snmpset -v 1 -c private bottompdu.23wwc.org 1.3.6.1.4.1.318.1.1.12.3.3.1.1.4.2 integer 1
