@@ -18,11 +18,11 @@ else
         echo 0 > $FILE
     fi
 
-    # Get the current value and increment it. When it reaches 3, reset it and
-    # restart the cable modem
+    # Get the current value and increment it. When it reaches 4, reset it and
+    # restart the cable modem. This gives the modem enough time to reset.
     VALUE=`cat $FILE`
     case $VALUE in
-        0|1)
+        0|1|2)
             let "NEW_VALUE=$VALUE+1"
             echo $NEW_VALUE > $FILE
             ;;
