@@ -1,0 +1,5 @@
+#! /bin/bash
+FILE=/tmp/virgin
+LOGFILE=$HOME/virginsucks/virgin.log
+IP_ADDR=8.8.8.8
+RESTART_CABLE_MODEM=$HOME/virginmediasuck/restart_modem
