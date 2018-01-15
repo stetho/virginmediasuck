@@ -1,5 +1,34 @@
 #! /bin/bash
 FILE=/tmp/virgin
-LOGFILE=$HOME/virginsucks/virgin.log
+TIMESTAMP=`date`
+LOGFILE=$HOME/virginmediasuck/virgin.log
 IP_ADDR=8.8.8.8
 RESTART_CABLE_MODEM=$HOME/virginmediasuck/restart_modem
+
+if ping -c 1 $IP_ADDR &> /dev/null; then
+    echo "Internet available"
+    # Reset the downtime count when the connection is available
+    echo 0 > $FILE
+else
+    # Log that the internet is down
+    echo "$TIMESTAMP: Internet is not available." >> $LOGFILE
+
+    # If the file doesn't exist, create it
+    if [ ! -f $FILE ]; then
+        echo 0 > $FILE
+    fi
+
+    # Get the current value and increment it. When it reaches 3, reset it and
+    # restart the cable modem
+    VALUE=`cat $FILE`
+    case $VALUE in
+        0|1)
+            let "NEW_VALUE=$VALUE+1"
+            echo $NEW_VALUE > $FILE
+            ;;
+        *)
+            echo 0 > $FILE
+            $RESTART_CABLE_MODEM
+            ;;
+    esac
+fi
