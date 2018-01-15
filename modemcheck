@@ -6,7 +6,7 @@ IP_ADDR=8.8.8.8
 RESTART_CABLE_MODEM=$HOME/virginmediasuck/restart_modem
 
 if ping -c 1 $IP_ADDR &> /dev/null; then
-    echo "$TIMESTAP: Internet available" >> $LOGFILE
+    echo "$TIMESTAMP: Internet available" >> $LOGFILE
     # Reset the downtime count when the connection is available
     echo 0 > $FILE
 else
